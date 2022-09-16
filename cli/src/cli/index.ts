@@ -125,9 +125,13 @@ export const runCli = async () => {
     )
     .parse(process.argv);
 
+  // FIXME: TEMPORARY WARNING WHEN USING YARN 2. SEE ISSUE #454
   // FIXME: TEMPORARY WARNING WHEN USING YARN 3. SEE ISSUE #57
-  if (process.env.npm_config_user_agent?.startsWith("yarn/3")) {
-    logger.warn(`  WARNING: It looks like you are using Yarn 3. This is currently not supported,
+  if (
+    process.env.npm_config_user_agent?.startsWith("yarn/3") ||
+    process.env.npm_confg_user_agent?.startsWith("yarn/2")
+  ) {
+    logger.warn(`  WARNING: It looks like you are using Yarn 2/3. This is currently not supported,
   and likely to result in a crash. Please run create-t3-app with another
   package manager such as pnpm, npm, or Yarn Classic.
   See: https://github.com/t3-oss/create-t3-app/issues/57`);
